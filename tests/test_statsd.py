@@ -141,6 +141,11 @@ class TestDogStatsd(object):
         t.assert_equal('timed.test', name)
         self.assert_almost_equal(0.5, float(value), 0.1)
 
+    def test_singleton_present(self):
+        try:
+            from statsd import statsd
+        except ImportError:
+            raise Exception("Expected singleton instance of DogStatsd not present in module")
 
 if __name__ == '__main__':
     statsd = statsd
